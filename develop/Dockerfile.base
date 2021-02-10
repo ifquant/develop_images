@@ -1,0 +1,86 @@
+#https://github.com/tianon/docker-brew-ubuntu-core.git
+FROM base:dev
+
+# VULN_SCAN_HASH=
+ENV DEBIAN_FRONTEND=noninteractive \
+    LANG=C.UTF-8
+USER root
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    gdb              \
+    clang-11         \
+    clangd-11        \
+    python3-clang-11 \
+    exuberant-ctags  \
+    neovim           \
+    wget             \
+    julia            \
+    r-base           \
+    unrar            \
+    nodejs           \
+    net-tools        \
+    subversion       \
+    cmake            \
+    yarn             \
+    npm              \
+    libboost-dev     \
+    pkg-config
+
+
+#cnpm  install -g semver  &&\
+USER root
+RUN  apt remove -y nodejs && \
+     curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -  && \
+     apt remove -y nodejs  && \
+     apt-get install -y nodejs && \
+     export PATH=$PATH &&\
+     curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -  &&\
+     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
+     sudo apt-get update && sudo apt-get install -y yarn  
+
+#     npm  install -g cnpm --registry=https://registry.npm.taobao.org && \
+#     npm cache clean --force  && \
+#     npm install -g code-server --registry=https://registry.npm.taobao.org  &&\
+#     cnpm install @coder/node-browser -g && \
+#     cnpm install applicationinsights  -g && \
+#     cnpm install yauzl -g && \
+#     cnpm install yazl -g  && \
+#     cnpm install spdlog -g
+RUN   mkdir -p /home/dev/.vscode-server
+RUN  npm config set registry https://registry.npm.taobao.org
+COPY extensions/   /home/dev/.vscode-server/extensions/
+RUN  chown -R dev.dev /home/dev/.vscode-server/extensions
+
+
+#install go
+RUN apt-get install wget -y
+RUN wget https://golang.google.cn/dl/go1.15.7.linux-amd64.tar.gz -O /tmp/go1.15.7.linux-amd64.tar.gz
+RUN tar -xzf /tmp/go1.15.7.linux-amd64.tar.gz
+RUN mv go  /usr/local/
+RUN PATH="/usr/local/go/bin/:$PATH"
+USER dev
+RUN PATH="/usr/local/go/bin/:$PATH"
+USER root
+
+#export PATH=$PATH:/usr/local/go/bin/
+
+#install rust
+COPY rs.sh  /tmp/rs.sh
+#RUN curl  https://sh.rustup.rs  -o /tmp/rs.sh
+#RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs  -o /tmp/rs.sh
+RUN chmod +x /tmp/rs.sh
+USER dev
+RUN /tmp/rs.sh -y
+RUN PATH="/home/dev/.cargo/bin/:$PATH"
+
+#| sh 
+#wget   sh -y
+#$HOME/.cargo/bin
+#export PATH=/home/dev/.cargo/bin/:$PATH
+
+
+#RUN PATH="/opt/gtk/bin:$PATH"
+USER dev
+
+#to base:dev.lang

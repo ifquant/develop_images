@@ -1,0 +1,712 @@
+{
+	"name": "r",
+	"displayName": "R",
+	"description": "R language support (run, snippet, viewer)",
+	"version": "1.6.2",
+	"author": "Yuki Ueda",
+	"license": "SEE LICENSE IN LICENSE",
+	"publisher": "Ikuyadeu",
+	"icon": "images/Rlogo.png",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Ikuyadeu/vscode-R"
+	},
+	"bugs": {
+		"url": "https://github.com/Ikuyadeu/vscode-R/issues"
+	},
+	"categories": [
+		"Programming Languages",
+		"Snippets",
+		"Other"
+	],
+	"keywords": [
+		"R",
+		"R language",
+		"R documentation",
+		"R Markdown"
+	],
+	"engines": {
+		"vscode": "^1.51.0"
+	},
+	"activationEvents": [
+		"onLanguage:r",
+		"onLanguage:rd",
+		"onLanguage:rmd",
+		"onLanguage:debian-control.r",
+		"workspaceContains:*.{rproj,Rproj,r,R,rd,Rd,rmd,Rmd}",
+		"onCommand:r.createRTerm",
+		"onCommand:r.runSource",
+		"onCommand:r.knitRmd",
+		"onCommand:r.knitRmdToPdf",
+		"onCommand:r.knitRmdToHtml",
+		"onCommand:r.knitRmdToAll",
+		"onCommand:r.runSourcewithEcho",
+		"onCommand:r.runSelection",
+		"onCommand:r.runSelectionInActiveTerm",
+		"onCommand:r.selectCurrentChunk",
+		"onCommand:r.runCurrentChunk",
+		"onCommand:r.runPreviousChunk",
+		"onCommand:r.runNextChunk",
+		"onCommand:r.runAboveChunks",
+		"onCommand:r.runCurrentAndBelowChunks",
+		"onCommand:r.runBelowChunks",
+		"onCommand:r.runAllChunks",
+		"onCommand:r.goToPreviousChunk",
+		"onCommand:r.goToNextChunk",
+		"onCommand:r.createGitignore",
+		"onCommand:r.runCommandWithSelectionOrWord",
+		"onCommand:r.runCommandWithEditorPath",
+		"onCommand:r.runCommand",
+		"onCommand:r.showHelp",
+		"onCommand:r.helpPanel.back",
+		"onCommand:r.helpPanel.forward"
+	],
+	"main": "./dist/extension",
+	"contributes": {
+		"languages": [
+			{
+				"id": "r",
+				"extensions": [
+					".r",
+					".rhistory",
+					".rprofile",
+					".rt"
+				],
+				"aliases": [
+					"R",
+					"r"
+				],
+				"firstLine": "^#!/.*\\bRscript\\b",
+				"configuration": "./language/r-configuration.json"
+			},
+			{
+				"id": "rd",
+				"extensions": [
+					".rd"
+				],
+				"aliases": [
+					"R documentation",
+					"r documentation"
+				],
+				"configuration": "./language/rd-configuration.json"
+			},
+			{
+				"id": "rmd",
+				"extensions": [
+					".rmd"
+				],
+				"aliases": [
+					"R Markdown",
+					"r markdown"
+				],
+				"configuration": "./language/rmd-configuration.json"
+			},
+			{
+				"id": "debian-control.r",
+				"extensions": [
+					".Rproj"
+				],
+				"aliases": [
+					"R DCF"
+				],
+				"filenames": [
+					"DESCRIPTION"
+				],
+				"configuration": "./language/dcf-configuration.json"
+			}
+		],
+		"snippets": [
+			{
+				"language": "r",
+				"path": "./snippets/r-snippets.json"
+			},
+			{
+				"language": "rd",
+				"path": "./snippets/r-snippets.json"
+			},
+			{
+				"language": "rmd",
+				"path": "./snippets/rmarkdown.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "r",
+				"scopeName": "source.r",
+				"path": "./syntax/r.json"
+			},
+			{
+				"language": "rd",
+				"scopeName": "text.tex.latex.rd",
+				"path": "./syntax/Rd (R Documentation).json"
+			},
+			{
+				"language": "debian-control.r",
+				"scopeName": "debian-control.r",
+				"path": "./syntax/dcf.json",
+				"embeddedLanguages": {
+					"meta.embedded.block.r": "r"
+				}
+			},
+			{
+				"language": "rmd",
+				"scopeName": "text.html.rmarkdown",
+				"path": "./syntax/RMarkdown.json",
+				"embeddedLanguages": {
+					"meta.embedded.block.html": "html",
+					"source.js": "javascript",
+					"source.css": "css",
+					"meta.embedded.block.frontmatter": "yaml",
+					"meta.embedded.block.css": "css",
+					"meta.embedded.block.ini": "ini",
+					"meta.embedded.block.java": "java",
+					"meta.embedded.block.lua": "lua",
+					"meta.embedded.block.makefile": "makefile",
+					"meta.embedded.block.perl": "perl",
+					"meta.embedded.block.r": "r",
+					"meta.embedded.block.ruby": "ruby",
+					"meta.embedded.block.php": "php",
+					"meta.embedded.block.sql": "sql",
+					"meta.embedded.block.vs_net": "vs_net",
+					"meta.embedded.block.xml": "xml",
+					"meta.embedded.block.xsl": "xsl",
+					"meta.embedded.block.yaml": "yaml",
+					"meta.embedded.block.dosbatch": "dosbatch",
+					"meta.embedded.block.clojure": "clojure",
+					"meta.embedded.block.coffee": "coffee",
+					"meta.embedded.block.c": "c",
+					"meta.embedded.block.cpp": "cpp",
+					"meta.embedded.block.diff": "diff",
+					"meta.embedded.block.dockerfile": "dockerfile",
+					"meta.embedded.block.go": "go",
+					"meta.embedded.block.groovy": "groovy",
+					"meta.embedded.block.pug": "jade",
+					"meta.embedded.block.javascript": "javascript",
+					"meta.embedded.block.json": "json",
+					"meta.embedded.block.less": "less",
+					"meta.embedded.block.objc": "objc",
+					"meta.embedded.block.scss": "scss",
+					"meta.embedded.block.perl6": "perl6",
+					"meta.embedded.block.powershell": "powershell",
+					"meta.embedded.block.python": "python",
+					"meta.embedded.block.rust": "rust",
+					"meta.embedded.block.scala": "scala",
+					"meta.embedded.block.shellscript": "shellscript",
+					"meta.embedded.block.typescript": "typescript",
+					"meta.embedded.block.typescriptreact": "typescriptreact",
+					"meta.embedded.block.csharp": "csharp",
+					"meta.embedded.block.fsharp": "fsharp"
+				}
+			},
+			{
+				"scopeName": "text.html.markdown.redcarpet",
+				"path": "./syntax/Markdown Redcarpet.json",
+				"injectTo": [
+					"text.html.rmarkdown"
+				],
+				"embeddedLanguages": {
+					"meta.embedded.block.c": "c",
+					"meta.embedded.block.cpp": "cpp",
+					"meta.embedded.block.r": "r",
+					"meta.embedded.block.yaml": "yaml"
+				}
+			},
+			{
+				"path": "./syntax/Rcpp.json",
+				"scopeName": "comment.block.r",
+				"injectTo": [
+					"source.cpp"
+				]
+			}
+		],
+		"commands": [
+			{
+				"command": "r.showHelp",
+				"title": "R: Show help"
+			},
+			{
+				"command": "r.helpPanel.back",
+				"title": "R Help Panel: Go Back",
+				"icon": "$(arrow-left)"
+			},
+			{
+				"command": "r.helpPanel.forward",
+				"title": "R Help Panel: Go Forward",
+				"icon": "$(arrow-right)"
+			},
+			{
+				"title": "Create R terminal",
+				"category": "R",
+				"command": "r.createRTerm"
+			},
+			{
+				"title": "Run Source",
+				"category": "R",
+				"command": "r.runSource",
+				"icon": {
+					"light": "./images/DownloadFile.ico",
+					"dark": "./images/DownloadFile_inverse.ico"
+				}
+			},
+			{
+				"title": "Knit Rmd",
+				"category": "R",
+				"command": "r.knitRmd",
+				"icon": {
+					"light": "./images/DownloadFile.ico",
+					"dark": "./images/DownloadFile_inverse.ico"
+				}
+			},
+			{
+				"title": "Knit Rmd To PDF",
+				"category": "R",
+				"command": "r.knitRmdToPdf"
+			},
+			{
+				"title": "Knit Rmd To HTML",
+				"category": "R",
+				"command": "r.knitRmdToHtml"
+			},
+			{
+				"title": "Knit Rmd To All Formats",
+				"category": "R",
+				"command": "r.knitRmdToAll"
+			},
+			{
+				"title": "Run Source with Echo",
+				"category": "R",
+				"command": "r.runSourcewithEcho"
+			},
+			{
+				"title": "Run Selection/Line",
+				"category": "R",
+				"command": "r.runSelection"
+			},
+			{
+				"title": "Show number of rows for selected object",
+				"category": "R",
+				"command": "r.nrow"
+			},
+			{
+				"title": "Show length for a selected object",
+				"category": "R",
+				"command": "r.length"
+			},
+			{
+				"title": "Show first part of a selected object",
+				"category": "R",
+				"command": "r.head"
+			},
+			{
+				"title": "Show first part of a selected object (transposed)",
+				"category": "R",
+				"command": "r.thead"
+			},
+			{
+				"title": "Show names for a selected object",
+				"category": "R",
+				"command": "r.names"
+			},
+			{
+				"title": "Create gitignore",
+				"category": "R",
+				"command": "r.createGitignore"
+			},
+			{
+				"title": "Preview Dataframe",
+				"category": "R",
+				"command": "r.previewDataframe"
+			},
+			{
+				"title": "Preview Environment",
+				"category": "R",
+				"command": "r.previewEnvironment"
+			},
+			{
+				"title": "Load All",
+				"category": "R",
+				"command": "r.loadAll"
+			},
+			{
+				"title": "Test Package",
+				"category": "R",
+				"command": "r.test"
+			},
+			{
+				"title": "Install Package",
+				"category": "R",
+				"command": "r.install"
+			},
+			{
+				"title": "Build Package",
+				"category": "R",
+				"command": "r.build"
+			},
+			{
+				"title": "Document",
+				"category": "R",
+				"command": "r.document"
+			},
+			{
+				"title": "Attach Active Terminal",
+				"category": "R",
+				"command": "r.attachActive"
+			},
+			{
+				"title": "Show Plot History",
+				"category": "R",
+				"command": "r.showPlotHistory"
+			},
+			{
+				"title": "Run Command With Selection or Word in Terminal",
+				"category": "R",
+				"command": "r.runCommandWithSelectionOrWord"
+			},
+			{
+				"title": "Run Command With Editor Path in Terminal",
+				"category": "R",
+				"command": "r.runCommandWithEditorPath"
+			},
+			{
+				"title": "Run Command in Terminal",
+				"category": "R",
+				"command": "r.runCommand"
+			},
+			{
+				"title": "Run from Beginning to Line",
+				"category": "R",
+				"command": "r.runFromBeginningToLine"
+			},
+			{
+				"title": "Run from Line to End",
+				"category": "R",
+				"command": "r.runFromLineToEnd"
+			},
+			{
+				"title": "Run Selection/Line (Retain Cursor)",
+				"category": "R",
+				"command": "r.runSelectionRetainCursor"
+			},
+			{
+				"title": "Select Current Chunk",
+				"category": "R",
+				"command": "r.selectCurrentChunk"
+			},
+			{
+				"title": "Run Current Chunk",
+				"category": "R",
+				"command": "r.runCurrentChunk"
+			},
+			{
+				"title": "Run Previous Chunk",
+				"category": "R",
+				"command": "r.runPreviousChunk"
+			},
+			{
+				"title": "Run Next Chunk",
+				"category": "R",
+				"command": "r.runNextChunk"
+			},
+			{
+				"title": "Run Above Chunks",
+				"category": "R",
+				"command": "r.runAboveChunks"
+			},
+			{
+				"title": "Run Current and Below Chunks",
+				"category": "R",
+				"command": "r.runCurrentAndBelowChunks"
+			},
+			{
+				"title": "Run Below Chunks",
+				"category": "R",
+				"command": "r.runBelowChunks"
+			},
+			{
+				"title": "Run All Chunks",
+				"category": "R",
+				"command": "r.runAllChunks"
+			},
+			{
+				"title": "Go to Previous Chunk",
+				"category": "R",
+				"command": "r.goToPreviousChunk"
+			},
+			{
+				"title": "Go to Next Chunk",
+				"category": "R",
+				"command": "r.goToNextChunk"
+			},
+			{
+				"title": "Launch RStudio Addin",
+				"category": "R",
+				"command": "r.launchAddinPicker"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "r.runSelection",
+				"key": "Ctrl+enter",
+				"mac": "cmd+enter",
+				"when": "editorTextFocus && editorLangId == 'r'"
+			},
+			{
+				"command": "r.runSelection",
+				"key": "Ctrl+enter",
+				"mac": "cmd+enter",
+				"when": "editorTextFocus && editorLangId == 'rmd'"
+			},
+			{
+				"command": "r.runSelectionRetainCursor",
+				"key": "alt+enter",
+				"mac": "option+enter",
+				"when": "editorTextFocus && editorLangId == 'r'"
+			},
+			{
+				"command": "r.runCurrentChunk",
+				"key": "Ctrl+shift+enter",
+				"mac": "cmd+shift+enter",
+				"when": "editorTextFocus && editorLangId == 'rmd'"
+			},
+			{
+				"command": "r.runAboveChunks",
+				"key": "Ctrl+alt+p",
+				"mac": "cmd+alt+p",
+				"when": "editorTextFocus && editorLangId == 'rmd'"
+			},
+			{
+				"command": "r.runSource",
+				"key": "shift+Ctrl+s",
+				"mac": "shift+cmd+s",
+				"when": "editorTextFocus && editorLangId == 'r'"
+			},
+			{
+				"command": "r.knitRmd",
+				"key": "shift+Ctrl+k",
+				"mac": "shift+cmd+k",
+				"when": "editorTextFocus && editorLangId == 'rmd'"
+			},
+			{
+				"command": "r.runSourcewithEcho",
+				"key": "shift+Ctrl+enter",
+				"mac": "shift+cmd+enter",
+				"when": "editorTextFocus && editorLangId == 'r'"
+			},
+			{
+				"command": "r.runFromBeginningToLine",
+				"key": "Ctrl+alt+b",
+				"mac": "cmd+alt+b",
+				"when": "editorTextFocus && editorLangId == 'r'"
+			},
+			{
+				"command": "r.runFromLineToEnd",
+				"key": "Ctrl+alt+e",
+				"mac": "cmd+alt+e",
+				"when": "editorTextFocus && editorLangId == 'r'"
+			}
+		],
+		"menus": {
+			"editor/title": [
+				{
+					"when": "editorLangId == r",
+					"command": "r.runSource",
+					"group": "navigation"
+				},
+				{
+					"when": "editorLangId == rmd",
+					"command": "r.knitRmd",
+					"group": "navigation"
+				},
+				{
+					"command": "r.helpPanel.back",
+					"when": "resourceScheme =~ /webview/ && r.helpPanel.active",
+					"group": "navigation"
+				},
+				{
+					"command": "r.helpPanel.forward",
+					"when": "resourceScheme =~ /webview/ && r.helpPanel.active",
+					"group": "navigation"
+				}
+			]
+		},
+		"configuration": {
+			"type": "object",
+			"title": "R",
+			"properties": {
+				"r.rpath.windows": {
+					"type": "string",
+					"default": "",
+					"description": "Path to an R executable for Windows. Must be \"vanilla\" R, not radian etc.!"
+				},
+				"r.rpath.mac": {
+					"type": "string",
+					"default": "",
+					"description": "Path to an R executable for macOS. Must be \"vanilla\" R, not radian etc.!"
+				},
+				"r.rpath.linux": {
+					"type": "string",
+					"default": "",
+					"description": "Path to an R executable for Linux. Must be \"vanilla\" R, not radian etc.!"
+				},
+				"r.rterm.windows": {
+					"type": "string",
+					"default": "",
+					"description": "R path for Windows. Can also be radian etc."
+				},
+				"r.rterm.mac": {
+					"type": "string",
+					"default": "",
+					"description": "R path for macOS. Can also be radian etc."
+				},
+				"r.rterm.linux": {
+					"type": "string",
+					"default": "",
+					"description": "R path for Linux. Can also be radian etc."
+				},
+				"r.rterm.option": {
+					"type": "array",
+					"default": [
+						"--no-save",
+						"--no-restore"
+					],
+					"description": "R command line options.",
+					"items": {
+						"type": "string"
+					}
+				},
+				"r.rmarkdown.codeLensCommands": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"default": [
+						"r.runCurrentChunk",
+						"r.runAboveChunks"
+					],
+					"description": "Customize RMarkdown CodeLens, which are inline commands/buttons e.g. 'Run Chunk' shown on the first line of each code chunk. Available commands:\n\nr.selectCurrentChunk\nr.runCurrentChunk\nr.runAboveChunks\nr.runCurrentAndBelowChunks\nr.runBelowChunks\nr.runAllChunks\nr.runPreviousChunk\nr.runNextChunk\nr.goToPreviousChunk\nr.goToNextChunk\n\n----------------------------------\nCustomize both the commands AND its orders (that is, CodeLens respect user-specified orders):"
+				},
+				"r.rmarkdown.enableCodeLens": {
+					"type": "boolean",
+					"default": true,
+					"description": "Enable RMarkdown CodeLens, which are inline commands/buttons e.g. 'Run Chunk | Run Above' shown on the first line of each code chunk.\n\n- Click the buttons to run commands.\n- Hover on the buttons to show tooltips.\n- CodeLens commands are customizable via settings UI (Rmarkdown: Code Lens commands) or settings.json `r.rmarkdown.codeLensCommands`"
+				},
+				"r.rmarkdown.chunkBackgroundColor": {
+					"type": "string",
+					"default": "rgba(128, 128, 128, 0.1)",
+					"description": "RMarkdown chunk background color in RGBA or RGB value. Defaults to rgba(128, 128, 128, 0.1). Leave it empty to disable it (use default editor background color). Reload VS Code after changing settings.\n\nLearn how to set colors: https://www.w3schools.com/css/css_colors_rgb.asp.\n\nExamples for syntax rgba(<red>, <green>, <blue>, <alpha>):\nrgba(128, 128, 128, 0.1)\nrgba(128, 128, 128, 0.3)\nrgba(255, 165, 0, 0.1)\n\n"
+				},
+				"r.helpPanel.enableSyntaxHighlighting": {
+					"type": "boolean",
+					"default": true,
+					"description": "Enable syntax highlighting in the help panel."
+				},
+				"r.helpPanel.rpath": {
+					"type": "string",
+					"default": "",
+					"markdownDescription": "DEPRECATED! Path to an R executable. Must be \"vanilla\" R, not radian etc.! Will be read from registry or path if not set.",
+					"markdownDeprecationMessage": "Will be deprecated. Use `#r.rpath.windows#`, `#r.rpath.mac#`, or `#r.rpath.linux#` instead.",
+					"deprecationMessage": "Will be deprecated. Use r.rpath.windows, r.rpath.mac, or r.rpath.linux instead."
+				},
+				"r.helpPanel.helpProvider": {
+					"type": "string",
+					"default": "Rserver",
+					"enum": [
+						"custom",
+						"Rserver"
+					],
+					"enumDescriptions": [
+						"A custom implementation of the R help server.",
+						"R's builtin help server"
+					]
+				},
+				"r.source.encoding": {
+					"type": "string",
+					"default": "UTF-8",
+					"description": "An optional encoding to pass to R when executing the file, i.e. 'source(FILE, encoding=ENCODING)'."
+				},
+				"r.source.focus": {
+					"type": "string",
+					"default": "editor",
+					"enum": [
+						"editor",
+						"terminal"
+					],
+					"description": "Keeping focus when running."
+				},
+				"r.alwaysUseActiveTerminal": {
+					"type": "boolean",
+					"default": false,
+					"description": "Use active terminal for all commands, rather than creating a new R terminal."
+				},
+				"r.bracketedPaste": {
+					"type": "boolean",
+					"default": false,
+					"description": "Use bracketed paste mode when sending code to console. Enable for Radian console."
+				},
+				"r.sessionWatcher": {
+					"type": "boolean",
+					"default": false,
+					"description": "Enable R session watcher (experimental). Restart required to take effect."
+				},
+				"r.rtermSendDelay": {
+					"type": "integer",
+					"default": 8,
+					"description": "Delay in milliseconds before sending each line to rterm (only applies if r.bracketedPaste is false)"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "webpack --mode production",
+		"compile": "webpack --mode none",
+		"watch": "webpack --mode none --watch",
+		"pretest": "tsc -p ./",
+		"test": "node ./out/test/runTest.js",
+		"lint": "eslint src --ext ts"
+	},
+	"devDependencies": {
+		"@types/cheerio": "^0.22.22",
+		"@types/express": "^4.17.9",
+		"@types/fs-extra": "^9.0.4",
+		"@types/highlight.js": "^10.1.0",
+		"@types/mocha": "^8.0.4",
+		"@types/node": "^14.14.10",
+		"@types/showdown": "^1.9.3",
+		"@types/vscode": "^1.51.0",
+		"@types/winreg": "^1.2.30",
+		"@typescript-eslint/eslint-plugin": "^4.9.0",
+		"@typescript-eslint/parser": "^4.9.0",
+		"copy-webpack-plugin": "^6.3.2",
+		"devreplay": "^1.9.3",
+		"eslint": "^7.15.0",
+		"eslint-plugin-jsdoc": "^30.7.8",
+		"mocha": "^8.2.1",
+		"ts-loader": "^8.0.11",
+		"typescript": "^4.1.2",
+		"vscode-test": "^1.4.1",
+		"webpack": "^5.10.0",
+		"webpack-cli": "^4.2.0",
+		"yamljs": "^0.3.0"
+	},
+	"dependencies": {
+		"bootstrap": "^4.5.3",
+		"cheerio": "^1.0.0-rc.3",
+		"datatables.net": "^1.10.22",
+		"datatables.net-bs4": "^1.10.22",
+		"datatables.net-fixedheader-jqui": "^3.1.7",
+		"fotorama": "^4.6.4",
+		"fs-extra": "^9.0.1",
+		"highlight.js": "^10.4.1",
+		"jquery": "^3.5.1",
+		"jquery.json-viewer": "^1.4.0",
+		"popper.js": "^1.16.1",
+		"showdown": "^1.9.1",
+		"tree-kill": "^1.2.2",
+		"winreg": "^1.2.4"
+	},
+	"__metadata": {
+		"id": "4dfff9f4-ff9b-47bb-b0d1-c54e18d8febb",
+		"publisherId": "b9ef81dd-63e0-4960-8e98-5b1004f41595",
+		"publisherDisplayName": "Yuki Ueda"
+	}
+}
